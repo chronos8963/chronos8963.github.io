@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Web | Chronos</title><meta name="author" content="Chronos"><meta name="copyright" content="Chronos"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[SWPUCTF 2021 新生赛]简简单单的逻辑 xor\python\算法分析 12345678flag &#x3D; &amp;#x27;xxxxxxxxxxxxxxxxxx&amp;#x27;list &#x3D; [47, 138, 127, 57, 117, 188, 51, 143, 17, 84, 42, 135, 76, 105, 28, 169, 25]result &#x3D; &amp;#x27;&amp;#x27;for i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web">
+<meta property="og:url" content="https://chronos.hilzy.top/%E9%80%86%E5%90%91/wp/WP/index.html">
+<meta property="og:site_name" content="Chronos">
+<meta property="og:description" content="[SWPUCTF 2021 新生赛]简简单单的逻辑 xor\python\算法分析 12345678flag &#x3D; &amp;#x27;xxxxxxxxxxxxxxxxxx&amp;#x27;list &#x3D; [47, 138, 127, 57, 117, 188, 51, 143, 17, 84, 42, 135, 76, 105, 28, 169, 25]result &#x3D; &amp;#x27;&amp;#x27;for i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/9AE5EADB01D68AF6519D1AE140FE1372.jpg">
+<meta property="article:published_time" content="2024-01-29T03:36:43.278Z">
+<meta property="article:modified_time" content="2023-08-01T03:04:47.077Z">
+<meta property="article:author" content="Chronos">
+<meta property="article:tag" content="逆向">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/9AE5EADB01D68AF6519D1AE140FE1372.jpg"><link rel="shortcut icon" href="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/20230414111903.png"><link rel="canonical" href="https://chronos.hilzy.top/%E9%80%86%E5%90%91/wp/WP/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Web',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-01 11:04:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/9AE5EADB01D68AF6519D1AE140FE1372.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Chronos</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Web</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-29T03:36:43.278Z" title="发表于 2024-01-29 11:36:43">2024-01-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-01T03:04:47.077Z" title="更新于 2023-08-01 11:04:47">2023-08-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%80%86%E5%90%91/">逆向</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%80%86%E5%90%91/wp/">wp</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Web"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="swpuctf-2021-新生赛简简单单的逻辑">[SWPUCTF 2021
+新生赛]简简单单的逻辑</h1>
+<p><code>xor\python\算法分析</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">flag = <span class="string">&#x27;xxxxxxxxxxxxxxxxxx&#x27;</span></span><br><span class="line"><span class="built_in">list</span> = [<span class="number">47</span>, <span class="number">138</span>, <span class="number">127</span>, <span class="number">57</span>, <span class="number">117</span>, <span class="number">188</span>, <span class="number">51</span>, <span class="number">143</span>, <span class="number">17</span>, <span class="number">84</span>, <span class="number">42</span>, <span class="number">135</span>, <span class="number">76</span>, <span class="number">105</span>, <span class="number">28</span>, <span class="number">169</span>, <span class="number">25</span>]</span><br><span class="line">result = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">list</span>)):</span><br><span class="line">    key = (<span class="built_in">list</span>[i]&gt;&gt;<span class="number">4</span>)+((<span class="built_in">list</span>[i] &amp; <span class="number">0xf</span>)&lt;&lt;<span class="number">4</span>)</span><br><span class="line">    result += <span class="built_in">str</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(flag[i])^key))[<span class="number">2</span>:].zfill(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># result=bcfba4d0038d48bd4b00f82796d393dfec</span></span><br></pre></td></tr></table></figure>
+<p>这个题啊，GPT秒了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="string">&#x27;bcfba4d0038d48bd4b00f82796d393dfec&#x27;</span></span><br><span class="line"><span class="built_in">list</span> = [<span class="number">47</span>, <span class="number">138</span>, <span class="number">127</span>, <span class="number">57</span>, <span class="number">117</span>, <span class="number">188</span>, <span class="number">51</span>, <span class="number">143</span>, <span class="number">17</span>, <span class="number">84</span>, <span class="number">42</span>, <span class="number">135</span>, <span class="number">76</span>, <span class="number">105</span>, <span class="number">28</span>, <span class="number">169</span>, <span class="number">25</span>]</span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">list</span>)):</span><br><span class="line">    key = (<span class="built_in">list</span>[i] &gt;&gt; <span class="number">4</span>) + ((<span class="built_in">list</span>[i] &amp; <span class="number">0xf</span>) &lt;&lt; <span class="number">4</span>)</span><br><span class="line">    original_char = <span class="built_in">chr</span>(<span class="built_in">int</span>(result[<span class="number">2</span>*i:<span class="number">2</span>*(i+<span class="number">1</span>)], <span class="number">16</span>) ^ key)</span><br><span class="line">    flag += original_char</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+<h1 id="swpuctf-2021-新生赛re1">[SWPUCTF 2021 新生赛]re1</h1>
+<p>c</p>
+<p>无壳，64位</p>
+<p>经过ida反编译后的伪代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">int __fastcall main(int argc, const char **argv, const char **envp)</span><br><span class="line">&#123;</span><br><span class="line">  char Str2[1008]; // [rsp+20h] [rbp-60h] BYREF</span><br><span class="line">  char Str1[1000]; // [rsp+410h] [rbp+390h] BYREF</span><br><span class="line">  int i; // [rsp+7FCh] [rbp+77Ch]</span><br><span class="line"></span><br><span class="line">  _main();</span><br><span class="line">  strcpy(Str2, &quot;&#123;34sy_r3v3rs3&#125;&quot;);</span><br><span class="line">  printf(&quot;please put your flag:&quot;);</span><br><span class="line">  scanf(&quot;%s&quot;, Str1);</span><br><span class="line">  for ( i = 0; i &lt;= 665; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( Str1[i] == &#x27;e&#x27; )</span><br><span class="line">      Str1[i] = &#x27;3&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line">  for ( i = 0; i &lt;= 665; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    if ( Str1[i] == &#x27;a&#x27; )</span><br><span class="line">      Str1[i] = &#x27;4&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line">  if ( strcmp(Str1, Str2) )</span><br><span class="line">    printf(&quot;you are wrong,see again!&quot;);</span><br><span class="line">  else</span><br><span class="line">    printf(&quot;you are right!&quot;);</span><br><span class="line">  system(&quot;pause&quot;);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>逻辑解释：</p>
+<ol type="1">
+<li><code>strcpy(Str2, "&#123;34sy_r3v3rs3&#125;");</code>:
+将字符串<code>"&#123;34sy_r3v3rs3&#125;"</code>复制到<code>Str2</code>中。</li>
+<li><code>printf("please put your flag:");</code>:
+打印提示消息，要求用户输入标志(flag)。</li>
+<li><code>scanf("%s", Str1);</code>:
+从用户输入中读取字符串，并将其存储在<code>Str1</code>中。</li>
+<li>两个循环：
+<ul>
+<li>第一个循环遍历<code>Str1</code>中的字符，如果字符是<code>101</code>（ASCII码对应的字符是'e'），则将其替换为<code>51</code>（ASCII码对应的字符是'3'）。</li>
+<li>第二个循环遍历<code>Str1</code>中的字符，如果字符是<code>97</code>（ASCII码对应的字符是'a'），则将其替换为<code>52</code>（ASCII码对应的字符是'4'）。</li>
+</ul></li>
+<li><code>if ( strcmp(Str1, Str2) )</code>:
+使用<code>strcmp</code>函数比较<code>Str1</code>和<code>Str2</code>，如果它们不相等（返回非零值），则执行下一步。</li>
+<li><code>printf("you are wrong,see again!");</code>:
+如果字符串比较结果不相等，则打印错误消息。</li>
+<li><code>else printf("you are right!");</code>:
+如果字符串比较结果相等，则打印成功消息。</li>
+<li><code>system("pause");</code>:
+暂停程序的执行，等待用户按下任意键继续。</li>
+<li><code>return 0;</code>: 返回0，表示程序正常结束。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv23552719">大佬的wp</a></p>
+<h1 id="nssctf-2022-spring-recruiteasy-c">[NSSCTF 2022 Spring
+Recruit]easy C</h1>
+<p>xor</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="type">char</span> a[]=<span class="string">&quot;wwwwwww&quot;</span>;</span><br><span class="line">	<span class="type">char</span> b[]=<span class="string">&quot;d`vxbQd&quot;</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//try to find out the flag</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;please input flag:&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,a);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">strlen</span>(a)!=<span class="number">7</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;NoNoNo\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">7</span>;i++)&#123;</span><br><span class="line">		a[i]++;</span><br><span class="line">		a[i]=a[i]^<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(!<span class="built_in">strcmp</span>(a,b))&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;good!\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;NoNoNo\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//flag 记得包上 NSSCTF&#123;&#125; 再提交!!!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重点在这</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">7</span>;i++)&#123;</span><br><span class="line">		a[i]++;</span><br><span class="line">		a[i]=a[i]^<span class="number">2</span>;</span><br><span class="line">&#125;		</span><br></pre></td></tr></table></figure>
+<p>倒过来就好了</p>
+<h1 id="litctf-2023世界上最棒的程序员">[LitCTF
+2023]世界上最棒的程序员</h1>
+<p>c</p>
+<p>无壳，32位，丢进ida，直接看</p>
+<h1 id="swpuctf-2021-新生赛简简单单的解密">[SWPUCTF 2021
+新生赛]简简单单的解密</h1>
+<p>rc4</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line">key = <span class="string">&quot;HereIsFlagggg&quot;</span></span><br><span class="line">flag = <span class="string">&quot;xxxxxxxxxxxxxxxxxxx&quot;</span></span><br><span class="line"></span><br><span class="line">s_box = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">256</span>))</span><br><span class="line">j = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">    j = (j + s_box[i] + <span class="built_in">ord</span>(key[i % <span class="built_in">len</span>(key)])) % <span class="number">256</span></span><br><span class="line">    s_box[i], s_box[j] = s_box[j], s_box[i]</span><br><span class="line">res = []</span><br><span class="line">i = j = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> flag:</span><br><span class="line">    i = (i + <span class="number">1</span>) % <span class="number">256</span></span><br><span class="line">    j = (j + s_box[i]) % <span class="number">256</span></span><br><span class="line">    s_box[i], s_box[j] = s_box[j], s_box[i]</span><br><span class="line">    t = (s_box[i] + s_box[j]) % <span class="number">256</span></span><br><span class="line">    k = s_box[t]</span><br><span class="line">    res.append(<span class="built_in">chr</span>(<span class="built_in">ord</span>(s) ^ k))</span><br><span class="line">cipher = <span class="string">&quot;&quot;</span>.join(res)</span><br><span class="line">crypt = (<span class="built_in">str</span>(base64.b64encode(cipher.encode(<span class="string">&#x27;utf-8&#x27;</span>)), <span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">enc1 = <span class="built_in">str</span>(base64.b64decode(crypt), <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">enc2 = urllib.parse.quote(enc1)</span><br><span class="line"><span class="built_in">print</span>(enc2)</span><br><span class="line"><span class="comment"># enc2 = %C2%A6n%C2%87Y%1Ag%3F%C2%A01.%C2%9C%C3%B7%C3%8A%02%C3%80%C2%92W%C3%8C%C3%BA</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">enc2 = %C2%A6n%C2%87Y%1Ag%3F%C2%A01.%C2%9C%C3%B7%C3%8A%02%C3%80%C2%92W%C3%8C%C3%BA</span><br><span class="line">cipher = ¦n.Y.g? 1..÷Ê.À.WÌú</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>看着代码很慌。。看最后输出，先base64加密，然后解密再url加密后输出。。。什么鬼。。硬套一层base误导观众么。。。真傻逼。
+k就是加密的密钥，K的生成过程和原值都给出了，直接按题里的程序跑就OK，异或特性求flag。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line">key = <span class="string">&quot;HereIsFlagggg&quot;</span></span><br><span class="line">enc = <span class="string">&quot;%C2%A6n%C2%87Y%1Ag%3F%C2%A01.%C2%9C%C3%B7%C3%8A%02%C3%80%C2%92W%C3%8C%C3%BA&quot;</span>  <span class="comment"># 输入加密后的密文</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解码 URL 编码</span></span><br><span class="line">enc = urllib.parse.unquote(enc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化 S-Box</span></span><br><span class="line">s_box = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">256</span>))</span><br><span class="line">j = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">    j = (j + s_box[i] + <span class="built_in">ord</span>(key[i % <span class="built_in">len</span>(key)])) % <span class="number">256</span></span><br><span class="line">    s_box[i], s_box[j] = s_box[j], s_box[i]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解密过程</span></span><br><span class="line">res = []</span><br><span class="line">i = j = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> enc:</span><br><span class="line">    i = (i + <span class="number">1</span>) % <span class="number">256</span></span><br><span class="line">    j = (j + s_box[i]) % <span class="number">256</span></span><br><span class="line">    s_box[i], s_box[j] = s_box[j], s_box[i]</span><br><span class="line">    t = (s_box[i] + s_box[j]) % <span class="number">256</span></span><br><span class="line">    k = s_box[t]</span><br><span class="line">    res.append(<span class="built_in">chr</span>(<span class="built_in">ord</span>(s) ^ k))</span><br><span class="line">plaintext = <span class="string">&quot;&quot;</span>.join(res)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(plaintext)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>不会写代码可以用赛博厨子，十分方便，先url解码，再rc4解密。</p>
+<h1 id="swpuctf-2021-新生赛re2">[SWPUCTF 2021 新生赛]re2</h1>
+<p>C</p>
+<p>64，无壳</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">_main();</span><br><span class="line">strcpy(Str2, &quot;ylqq]aycqyp&#123;&quot;);</span><br><span class="line">printf(Format);</span><br><span class="line">gets(Str);</span><br><span class="line">v7 = strlen(Str);</span><br><span class="line">for ( i = 0; i &lt; v7; ++i )</span><br><span class="line">&#123;</span><br><span class="line">  if ( (Str[i] &lt;= 96 || Str[i] &gt; 98) &amp;&amp; (Str[i] &lt;= 64 || Str[i] &gt; 66) )</span><br><span class="line">    Str[i] -= 2;</span><br><span class="line">  else</span><br><span class="line">    Str[i] += 24;</span><br><span class="line">&#125;</span><br><span class="line">if ( strcmp(Str, Str2) )</span><br><span class="line">  printf(asc_404024);</span><br><span class="line">else</span><br><span class="line">  printf(aBingo);</span><br><span class="line">system(&quot;pause&quot;);</span><br><span class="line">return 0;</span><br></pre></td></tr></table></figure>
+<p>反过来写就行，但是看wp有多解</p>
+<p>这题不行，垃圾</p>
+<h1 id="wustctf-2020level2">[WUSTCTF 2020]level2</h1>
+<p>UPX壳</p>
+<p>直接upx -d “路径”，脱了之后，ida直接看</p>
+<h1 id="hubuctf-2022-新生赛simple_re">[HUBUCTF 2022
+新生赛]simple_RE</h1>
+<p>Base64</p>
+<p>无壳64</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">int __fastcall main(int argc, const char **argv, const char **envp)</span><br><span class="line">&#123;</span><br><span class="line">  int v4; // [rsp+24h] [rbp-44h] BYREF</span><br><span class="line">  void *Buf1; // [rsp+28h] [rbp-40h] BYREF</span><br><span class="line">  char v6[56]; // [rsp+30h] [rbp-38h] BYREF</span><br><span class="line"></span><br><span class="line">  sub_401770(argc, argv, envp);</span><br><span class="line">  printf(&quot;please input the flag:&quot;);</span><br><span class="line">  scanf(&quot;%s&quot;, v6);</span><br><span class="line">  Buf1 = 0i64;</span><br><span class="line">  sub_401570(v6, &amp;Buf1, &amp;v4);</span><br><span class="line">  if ( !memcmp(Buf1, a5mc58bphliax7j, v4) )</span><br><span class="line">    printf(&quot;\nsuccess!&quot;);</span><br><span class="line">  else</span><br><span class="line">    printf(&quot;\nfailed!&quot;);</span><br><span class="line">  if ( Buf1 )</span><br><span class="line">    free(Buf1);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关键函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">__int64 __fastcall sub_401570(const char *a1, _QWORD *a2, int *a3)</span><br><span class="line">&#123;</span><br><span class="line">  v6 = strlen(a1);</span><br><span class="line">  v7 = v6 % 3;</span><br><span class="line">  if ( v6 % 3 )</span><br><span class="line">  &#123;</span><br><span class="line">    v8 = 4 * (v6 / 3) + 4;</span><br><span class="line">    v9 = v8;</span><br><span class="line">    v10 = malloc(v8 + 1i64);</span><br><span class="line">    v10[v8] = 0;</span><br><span class="line">    if ( v6 &lt;= 0 )</span><br><span class="line">      goto LABEL_5;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    v8 = 4 * (v6 / 3);</span><br><span class="line">    v9 = v8;</span><br><span class="line">    v10 = malloc(v8 + 1i64);</span><br><span class="line">    v10[v8] = 0;</span><br><span class="line">    if ( v6 &lt;= 0 )</span><br><span class="line">      goto LABEL_8;</span><br><span class="line">  &#125;</span><br><span class="line">  v11 = v10;</span><br><span class="line">  v12 = 0i64;</span><br><span class="line">  do</span><br><span class="line">  &#123;</span><br><span class="line">    v11 += 4;</span><br><span class="line">    v13 = a1[v12];</span><br><span class="line">    *(v11 - 4) = aQvejafhmuyjbac[v13 &gt;&gt; 2];</span><br><span class="line">    v14 = a1[v12 + 1];</span><br><span class="line">    *(v11 - 3) = aQvejafhmuyjbac[(v14 &gt;&gt; 4) | (16 * v13) &amp; 0x30];</span><br><span class="line">    v15 = a1[v12 + 2];</span><br><span class="line">    v12 += 3i64;</span><br><span class="line">    *(v11 - 2) = aQvejafhmuyjbac[(v15 &gt;&gt; 6) | (4 * v14) &amp; 0x3C];</span><br><span class="line">    *(v11 - 1) = aQvejafhmuyjbac[v15 &amp; 0x3F];</span><br><span class="line">  &#125;</span><br><span class="line">  while ( v6 &gt; (int)v12 );</span><br><span class="line">LABEL_5:</span><br><span class="line">  if ( v7 == 1 )</span><br><span class="line">  &#123;</span><br><span class="line">    v10[v9 - 2] = 61;</span><br><span class="line">    v10[v9 - 1] = 61;</span><br><span class="line">  &#125;</span><br><span class="line">  else if ( v7 == 2 )</span><br><span class="line">  &#123;</span><br><span class="line">    v10[v9 - 1] = 61;</span><br><span class="line">  &#125;</span><br><span class="line">LABEL_8:</span><br><span class="line">  *a2 = v10;</span><br><span class="line">  result = 0i64;</span><br><span class="line">  *a3 = v8;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是密文</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5Mc58bPHLiAx7J8ocJIlaVUxaJvMcoYMaoPMaOfg15c475tscHfM/8==</span><br></pre></td></tr></table></figure>
+<p>下面是编码表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qvEJAfHmUYjBac+u8Ph5n9Od17FrICL/X0gVtM4Qk6T2z3wNSsyoebilxWKGZpRD</span><br></pre></td></tr></table></figure>
+<p>我们把它丢给赛博厨子，秒杀</p>
+<h1 id="swpuctf-2021-新生赛非常简单的逻辑题">[SWPUCTF 2021
+新生赛]非常简单的逻辑题</h1>
+<p>Python</p>
+<p>简单个屁</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">flag = &#x27;xxxxxxxxxxxxxxxxxxxxx&#x27;</span><br><span class="line">s = &#x27;wesyvbniazxchjko1973652048@$+-&amp;*&lt;&gt;&#x27;</span><br><span class="line">result = &#x27;&#x27;</span><br><span class="line">for i in range(len(flag)):</span><br><span class="line">    s1 = ord(flag[i])//17</span><br><span class="line">    s2 = ord(flag[i])%17</span><br><span class="line">    result += s[(s1+i)%34]+s[-(s2+i+1)%34]</span><br><span class="line">print(result)</span><br><span class="line"># result = &#x27;v0b9n1nkajz@j0c4jjo3oi1h1i937b395i5y5e0e$i&#x27;</span><br></pre></td></tr></table></figure>
+<p>下面是题解</p>
+<p>感觉有点难想</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">flag = &quot;&quot;</span><br><span class="line">enc = &quot;v0b9n1nkajz@j0c4jjo3oi1h1i937b395i5y5e0e$i&quot;</span><br><span class="line">s = &quot;wesyvbniazxchjko1973652048@$+-&amp;*&lt;&gt;&quot;</span><br><span class="line">for i in range(len(enc) // 2):</span><br><span class="line">    for j in range(34, 127):</span><br><span class="line">        s1 = j // 17</span><br><span class="line">        s2 = j % 17</span><br><span class="line">        if enc[2 * i] == s[(s1 + i) % 34] and enc[2 * i + 1] == s[-(s2 + i + 1) % 34]:</span><br><span class="line">            flag += chr(j)</span><br><span class="line"></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+<h1 id="gfctf-2021wordy">[GFCTF 2021]wordy</h1>
+<p>花指令</p>
+<p>md，预期解</p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/TFOREVERY/p/17385302.html">大佬的WP</a></p>
+<p>非预期解</p>
+<figure>
+<img
+src="https://img-blog.csdnimg.cn/eaf5cc68bc3e4781b9bc2370370432dc.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>跟我看见的咋不太一样嘞</p>
+<h1 id="swpuctf-2021-新生赛fakerandom">[SWPUCTF 2021
+新生赛]fakerandom</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">flag = <span class="string">&#x27;xxxxxxxxxxxxxxxxxxxx&#x27;</span></span><br><span class="line">random.seed(<span class="number">1</span>)</span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    l.append(random.getrandbits(<span class="number">8</span>))</span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(l)):</span><br><span class="line">    random.seed(l[i])</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        result.append(<span class="built_in">ord</span>(flag[i * <span class="number">5</span> + n]) ^ random.getrandbits(<span class="number">8</span>))</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># result = [201, 8, 198, 68, 131, 152, 186, 136, 13, 130, 190, 112, 251, 93, 212, 1, 31, 214, 116, 244]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li><p><code>flag</code> 是一个包含20个字符的字符串，被初始化为
+'xxxxxxxxxxxxxxxxxxxx'。</p></li>
+<li><p>使用 <code>random.seed(1)</code>
+设置伪随机数生成器的种子为1。这将确保后续的随机数生成是可复现的，因为相同的种子将产生相同的随机数序列。</p></li>
+<li><p>创建一个空列表 <code>l</code>
+用于存储生成的4个8位随机数。这是通过迭代 <code>range(4)</code>，每次调用
+<code>random.getrandbits(8)</code> 来实现的，其中
+<code>getrandbits(8)</code> 生成8位的伪随机整数。</p></li>
+<li><p>创建一个空列表 <code>result</code> 用于存储结果。</p></li>
+<li><p>进入第一个循环 <code>for i in range(len(l))</code>，其中
+<code>len(l)</code> 是4，所以循环将执行4次。在每次循环中：</p>
+<ol type="a">
+<li><p>通过 <code>random.seed(l[i])</code> 使用列表 <code>l</code>
+中的一个值设置伪随机数生成器的种子，这将导致后续的随机数生成与之前生成的
+<code>l</code> 中的值有关。</p></li>
+<li><p>然后进入第二个循环
+<code>for n in range(5)</code>，该循环执行5次。在每次循环中，执行异或操作
+<code>ord(flag[i * 5 + n]) ^ random.getrandbits(8)</code>，其中
+<code>ord()</code> 返回字符的 ASCII 值。结果将被附加到列表
+<code>result</code> 中。</p></li>
+</ol></li>
+<li><p>最后，输出列表 <code>result</code>。</p></li>
+</ol>
+<p>总体来说，这段代码的目的似乎是通过异或操作混淆了原始字符串
+'xxxxxxxxxxxxxxxxxxxx'
+中的字符，而混淆的过程依赖于使用伪随机数生成器生成的随机数。由于种子被设置为1，因此相同的输入将始终产生相同的输出。这段代码的具体用途可能是数据加密或混淆。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://chronos.hilzy.top">Chronos</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://chronos.hilzy.top/%E9%80%86%E5%90%91/wp/WP/">https://chronos.hilzy.top/%E9%80%86%E5%90%91/wp/WP/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://chronos.hilzy.top" target="_blank">Chronos</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%80%86%E5%90%91/">逆向</a></div><div class="post_share"><div class="social-share" data-image="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/9AE5EADB01D68AF6519D1AE140FE1372.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/%E9%9B%B6%E7%A2%8E/Typro/Typora%E7%9A%84%E5%9B%BE%E5%83%8F%E5%92%8C%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/"><img class="next-cover" src="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/9AE5EADB01D68AF6519D1AE140FE1372.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Typora的图像和数学公式</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/a.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chronos</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#swpuctf-2021-%E6%96%B0%E7%94%9F%E8%B5%9B%E7%AE%80%E7%AE%80%E5%8D%95%E5%8D%95%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-number">1.</span> <span class="toc-text">[SWPUCTF 2021
+新生赛]简简单单的逻辑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#swpuctf-2021-%E6%96%B0%E7%94%9F%E8%B5%9Bre1"><span class="toc-number">2.</span> <span class="toc-text">[SWPUCTF 2021 新生赛]re1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nssctf-2022-spring-recruiteasy-c"><span class="toc-number">3.</span> <span class="toc-text">[NSSCTF 2022 Spring
+Recruit]easy C</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#litctf-2023%E4%B8%96%E7%95%8C%E4%B8%8A%E6%9C%80%E6%A3%92%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98"><span class="toc-number">4.</span> <span class="toc-text">[LitCTF
+2023]世界上最棒的程序员</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#swpuctf-2021-%E6%96%B0%E7%94%9F%E8%B5%9B%E7%AE%80%E7%AE%80%E5%8D%95%E5%8D%95%E7%9A%84%E8%A7%A3%E5%AF%86"><span class="toc-number">5.</span> <span class="toc-text">[SWPUCTF 2021
+新生赛]简简单单的解密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#swpuctf-2021-%E6%96%B0%E7%94%9F%E8%B5%9Bre2"><span class="toc-number">6.</span> <span class="toc-text">[SWPUCTF 2021 新生赛]re2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#wustctf-2020level2"><span class="toc-number">7.</span> <span class="toc-text">[WUSTCTF 2020]level2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hubuctf-2022-%E6%96%B0%E7%94%9F%E8%B5%9Bsimple_re"><span class="toc-number">8.</span> <span class="toc-text">[HUBUCTF 2022
+新生赛]simple_RE</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#swpuctf-2021-%E6%96%B0%E7%94%9F%E8%B5%9B%E9%9D%9E%E5%B8%B8%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%BB%E8%BE%91%E9%A2%98"><span class="toc-number">9.</span> <span class="toc-text">[SWPUCTF 2021
+新生赛]非常简单的逻辑题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gfctf-2021wordy"><span class="toc-number">10.</span> <span class="toc-text">[GFCTF 2021]wordy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#swpuctf-2021-%E6%96%B0%E7%94%9F%E8%B5%9Bfakerandom"><span class="toc-number">11.</span> <span class="toc-text">[SWPUCTF 2021
+新生赛]fakerandom</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/%E9%80%86%E5%90%91/wp/WP/" title="Web"><img src="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/9AE5EADB01D68AF6519D1AE140FE1372.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Web"/></a><div class="content"><a class="title" href="/%E9%80%86%E5%90%91/wp/WP/" title="Web">Web</a><time datetime="2024-01-29T03:36:43.278Z" title="发表于 2024-01-29 11:36:43">2024-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E9%9B%B6%E7%A2%8E/Typro/Typora%E7%9A%84%E5%9B%BE%E5%83%8F%E5%92%8C%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/" title="Typora的图像和数学公式"><img src="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/9AE5EADB01D68AF6519D1AE140FE1372.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Typora的图像和数学公式"/></a><div class="content"><a class="title" href="/%E9%9B%B6%E7%A2%8E/Typro/Typora%E7%9A%84%E5%9B%BE%E5%83%8F%E5%92%8C%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/" title="Typora的图像和数学公式">Typora的图像和数学公式</a><time datetime="2023-04-01T04:08:08.075Z" title="发表于 2023-04-01 12:08:08">2023-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E9%9B%B6%E7%A2%8E/fabric/fabric/" title="fabric搭建"><img src="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/9AE5EADB01D68AF6519D1AE140FE1372.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="fabric搭建"/></a><div class="content"><a class="title" href="/%E9%9B%B6%E7%A2%8E/fabric/fabric/" title="fabric搭建">fabric搭建</a><time datetime="2023-03-23T12:09:02.000Z" title="发表于 2023-03-23 20:09:02">2023-03-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/Nmap/blog(Nmap)/" title="Nmap用法"><img src="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/9AE5EADB01D68AF6519D1AE140FE1372.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Nmap用法"/></a><div class="content"><a class="title" href="/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/Nmap/blog(Nmap)/" title="Nmap用法">Nmap用法</a><time datetime="2022-11-11T11:06:32.000Z" title="发表于 2022-11-11 19:06:32">2022-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/web%E5%AE%89%E5%85%A8/SQL/blog(SQL)/" title="SQL基础"><img src="https://zcystar-1313738303.cos.ap-beijing.myqcloud.com/9AE5EADB01D68AF6519D1AE140FE1372.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL基础"/></a><div class="content"><a class="title" href="/web%E5%AE%89%E5%85%A8/SQL/blog(SQL)/" title="SQL基础">SQL基础</a><time datetime="2022-11-11T11:06:10.000Z" title="发表于 2022-11-11 19:06:10">2022-11-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Chronos</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
